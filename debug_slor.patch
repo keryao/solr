@@ -1,0 +1,15 @@
+diff --git a/includes/service.inc b/includes/service.inc
+index 9dd7da3..0c07c50 100755
+--- a/includes/service.inc
++++ b/includes/service.inc
+@@ -1135,7 +1135,9 @@ class SearchApiSolrService extends SearchApiAbstractService {
+       return $results;
+     }
+     catch (SearchApiException $e) {
+-    	throw new SearchApiException(t('An error occurred while trying to search with Solr: @msg.', array('@msg' => $e->getMessage())));
++    	watchdog('solr_debug', t('An error occurred while trying to search with Solr: @msg.', array('@msg' => $e->getMessage())));
++    	drupal_set_message('error in solr part', 'error');
++      throw new SearchApiException(t('An error occurred while trying to search with Solr: @msg.', array('@msg' => $e->getMessage())));
+     }
+   }
+ 
